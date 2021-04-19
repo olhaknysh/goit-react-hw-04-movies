@@ -1,0 +1,55 @@
+.card {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  width: 800px;
+}
+
+.button {
+  padding: 12px 10px;
+  border-radius: 50%;
+  border: 1px solid #932432;
+  color: #283747;
+
+  margin-bottom: 15px;
+
+  cursor: pointer;
+}
+
+.preloader {
+  display: block;
+  width: 360px;
+  text-align: center;
+}
+
+.info {
+  display: flex;
+}
+
+.maininfo {
+  margin-left: 40px;
+}
+
+.genres {
+  margin-bottom: 10px;
+}
+
+.addtitle {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.additionallink {
+  padding: 12px 10px;
+  border-radius: 50%;
+  border: 1px solid #932432;
+  color: #283747;
+}
+
+.activelink {
+  background-color: #932432;
+  color: #f3f3f3;
+}

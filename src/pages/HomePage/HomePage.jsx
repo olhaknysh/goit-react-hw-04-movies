@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
 import { getTrendingMovies } from '../../services/moviesApi';
+import Container from '../../components/Container';
+import MoviesList from '../../components/MoviesList';
+import Loader from '../../components/Loader';
 
 class HomePage extends Component {
   state = {
     movies: [],
+    error: '',
+    isLoading: false,
   };
 
   async componentDidMount() {
-    const movies = await getTrendingMovies();
-    this.setState({ movies });
+    try {
+      this.setState({ isLoading: true });
+      const movies = await getTrendingMovies();
+      this.setState({ movies, isLoading: false });
+
+      throw Error;
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, error, isLoading } = this.state;
     return (
-      <ul>
-        {movies.map(({ id, title, name }) => (
-          <li key={id}>
-            <Link to={`movies/${id}`}>{title || name}</Link>
-          </li>
-        ))}
-      </ul>
+      <Container>
+        <h2>Trending today</h2>
+        {isLoading && <Loader />}
+        {error ? <p>{error}</p> : <MoviesList movies={movies} />}
+      </Container>
     );
   }
 }

@@ -1,0 +1,15 @@
+.navlink {
+  padding: 12px 10px;
+  border-radius: 50%;
+  border: 1px solid #932432;
+  color: #283747;
+}
+
+.navlink:first-child {
+  margin-right: 20px;
+}
+
+.navlinkactive {
+  background-color: #932432;
+  color: #f3f3f3;
+}

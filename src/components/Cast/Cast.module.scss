@@ -1,0 +1,9 @@
+.castlist {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.castlist > li {
+  margin-left: 20px;
+}

@@ -17,4 +17,30 @@ const getMovieDetails = id => {
     .then(({ data }) => data);
 };
 
-export { getTrendingMovies, getMovieDetails };
+const getMoviesByQuery = query => {
+  return axios
+    .get(
+      `/search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`,
+    )
+    .then(({ data: { results } }) => results);
+};
+
+const getMovieCast = id => {
+  return axios
+    .get(`/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
+    .then(({ data: { cast } }) => cast);
+};
+
+const getMovieReviews = id => {
+  return axios
+    .get(`/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`)
+    .then(({ data: { results } }) => results);
+};
+
+export {
+  getTrendingMovies,
+  getMovieDetails,
+  getMoviesByQuery,
+  getMovieCast,
+  getMovieReviews,
+};
