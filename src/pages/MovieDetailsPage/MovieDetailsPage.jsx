@@ -56,8 +56,13 @@ class MovieDetailsPage extends Component {
 
     history.push({
       pathname: location?.state?.from.pathname || routes.home,
-      search: `?query=${location.state?.query || null}`,
     });
+
+    if (!!location?.state?.query) {
+      history.push({
+        search: `?query=${location.state.query}`,
+      });
+    }
   };
 
   render() {
