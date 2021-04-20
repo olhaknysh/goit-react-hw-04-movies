@@ -14,8 +14,6 @@ class Reviews extends Component {
       if (id) {
         const reviews = await getMovieReviews(id);
         this.setState({ reviews, error: '' });
-
-        throw Error;
       }
     } catch (err) {
       console.log(err);

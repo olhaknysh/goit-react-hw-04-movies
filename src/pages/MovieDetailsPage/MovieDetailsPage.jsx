@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { Route, NavLink } from 'react-router-dom';
+
 import { getMovieDetails } from '../../services/moviesApi';
-import routes from '../../utils/routes';
-import { lazy } from 'react';
 import ImageWithLoading from './isImageLoaded';
+import Loader from '../../components/Loader';
+
+import routes from '../../utils/routes';
 import styles from './MovieDetailsPage.module.scss';
 
 const Cast = lazy(() =>
@@ -128,14 +130,16 @@ class MovieDetailsPage extends Component {
           </div>
         )}
 
-        <Route
-          path={routes.cast}
-          render={props => <Cast {...props} id={id} />}
-        />
-        <Route
-          path={routes.reviews}
-          render={props => <Reviews {...props} id={id} />}
-        />
+        <Suspense fallback={<Loader />}>
+          <Route
+            path={routes.cast}
+            render={props => <Cast {...props} id={id} />}
+          />
+          <Route
+            path={routes.reviews}
+            render={props => <Reviews {...props} id={id} />}
+          />
+        </Suspense>
       </div>
     );
   }
