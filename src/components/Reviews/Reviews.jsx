@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 
+import Loader from '../Loader';
 import { getMovieReviews } from '../../services/moviesApi';
 import styles from './Reviews.module.scss';
 
 class Reviews extends Component {
   state = {
     reviews: [],
+    isLoading: false,
   };
 
   async componentDidMount() {
     try {
       const { id } = this.props;
       if (id) {
+        this.setState({ isLoading: true });
         const reviews = await getMovieReviews(id);
-        this.setState({ reviews, error: '' });
+        this.setState({ reviews, error: '', isLoading: false });
       }
     } catch (err) {
       console.log(err);
@@ -21,9 +24,10 @@ class Reviews extends Component {
   }
 
   render() {
-    const { reviews } = this.state;
+    const { reviews, isLoading } = this.state;
     return (
       <>
+        {isLoading && <Loader />}
         {reviews.length === 0 && <p>No reviews could be found</p>}
         <ul>
           {reviews.map(({ id, author, content }) => (

@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import { getMovieDetails } from '../../services/moviesApi';
 import ImageWithLoading from './isImageLoaded';
@@ -136,14 +136,16 @@ class MovieDetailsPage extends Component {
         )}
 
         <Suspense fallback={<Loader />}>
-          <Route
-            path={routes.cast}
-            render={props => <Cast {...props} id={id} />}
-          />
-          <Route
-            path={routes.reviews}
-            render={props => <Reviews {...props} id={id} />}
-          />
+          <Switch>
+            <Route
+              path={routes.cast}
+              render={props => <Cast {...props} id={id} />}
+            />
+            <Route
+              path={routes.reviews}
+              render={props => <Reviews {...props} id={id} />}
+            />
+          </Switch>
         </Suspense>
       </div>
     );
